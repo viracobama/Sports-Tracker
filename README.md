@@ -2,6 +2,22 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Steps Taken for Set-up
+
+- npx create-react-app sports-app
+
+- cd sports-app
+
+- npm i react-router-dom react-bootstrap bootstrap
+When successful, it should show the updates in the "package.json"  file under "dependencies"
+        
+        "bootstrap": "^5.3.3",
+        
+        "react-bootstrap": "^2.10.5",
+        
+        "react-router-dom": "^6.26.2"
+
+
 ## Available Scripts
 
 In the project directory, you can run:
