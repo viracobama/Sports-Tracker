@@ -14,7 +14,7 @@ import { GlobalStateContext } from '../components/GlobalState.js';
 
 function ScoresPage() {
 
-  const {globalState, setGlobalState} = useContext(GlobalStateContext);
+  const {globalState, isLoggedIn, currentUser} = useContext(GlobalStateContext);
   const sport = globalState.sport;
 
   return (
@@ -22,9 +22,13 @@ function ScoresPage() {
       <NavbarBS />
       <h1>Scores Page</h1>
       <br></br>
+      
+      {/* Testing : Temp */}
       <h3>Displaying information about <b>{sport}</b></h3>
+
       <SportSelection />
-      <p>testing</p>
+      {/* TODO: implement scores page */}
+
     </div>
   );
 }

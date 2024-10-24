@@ -30,6 +30,7 @@ import StatsPage from './pages/StatsPage';
 import SchedulePage from './pages/SchedulePage';
 import HomePage from './pages/HomePage';
 import SignupPage from './pages/SignupPage';
+import AccountPage from './pages/AccountPage';
 
 /**
  * Importing the GlobalStateProvider to be used for the global state (sport selection)
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
   {
     path: "signup",
     element: <SignupPage/>,
+  },
+  {
+    path: "account",
+    element: <AccountPage/>,
   },
 ]);
 

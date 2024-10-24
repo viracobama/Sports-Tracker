@@ -10,15 +10,22 @@
  *  useContext Documentation: https://react.dev/reference/react/useContext#usage
  */
 
-import {createContext, useState} from 'react';
+import {createContext, useState, useEffect} from 'react';
 
 export const GlobalStateContext = createContext({});
+export const AuthContext = createContext();
+
 
 export const GlobalStateProvider = ({children}) => {
+    // Global state for the sport selection
     const [globalState, setGlobalState] = useState({});
 
+    // Global state for the user login status and current user
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [currentUser, setCurrentUser] = useState(null);
+
     return (
-        <GlobalStateContext.Provider value={{globalState, setGlobalState}}>
+        <GlobalStateContext.Provider value={{globalState, setGlobalState, isLoggedIn, setIsLoggedIn, currentUser, setCurrentUser}}>
             {children}
         </GlobalStateContext.Provider>
     );

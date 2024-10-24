@@ -11,26 +11,49 @@
  *  https://react-bootstrap.netlify.app/docs/getting-started/introduction/
  */
 
+import {faUser } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import React, {useState, useContext} from 'react';
 import {Navbar, Nav, Container} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import logo from '../img/sports.png';
-import '../index.css';
-import React, {useState, useContext} from 'react';
-import { GlobalStateContext } from './GlobalState';
 import { useNavigate } from 'react-router-dom';
+
+import { GlobalStateContext } from './GlobalState';
+import LoginModal from './loginModal';
+import logo from '../img/logo.png';
+import '../styles/navbar.css';
 
 function NavbarBS() {
 
+    // State for the login modal
+    const [showModal, setShowModal] = useState(false);
+
+    // Functions to handle pop-up login modal
+    const handleShow = () => setShowModal(true);
+    const handleClose = () => setShowModal(false);
 
     const linkStyle = {
         fontSize: '1.3rem',
     };
 
-    const {globalState} = useContext(GlobalStateContext);
+    const {globalState, isLoggedIn} = useContext(GlobalStateContext);
     const Navigate = useNavigate();
     
+    // Function to handle the navigation to the different pages when the user clicks on the navbar links
     const handleNavClick = (path) => { 
         Navigate(path, {state: {sport: globalState.sport}});
+    }
+
+    // Function to handle the account icon click 
+    // it will set the navigation to the account page if the user is logged in if not, the login modal will show
+    const handleAccountClick = () => {
+        if(isLoggedIn.bool) {
+            Navigate('/account');
+        } else {
+            handleShow();
+        }
+
     }
 
     return (
@@ -48,13 +71,20 @@ function NavbarBS() {
             </Navbar.Brand>
             <Nav className="justify-content-end">
                 {/* I kept Nav.Link for the bootstrap formatting but added the as="span" to convert to a <span> so it lets me to use Navigate in the "handleNavClick" */}
-                <Nav.Link as="span" onClick={() => handleNavClick('/home')} style={linkStyle} className="navbar-link">Home</Nav.Link>
-                <Nav.Link as="span" onClick={() => handleNavClick('/stats')} style={linkStyle} className="navbar-link">Stats</Nav.Link>
-                <Nav.Link as="span" onClick={() => handleNavClick("/scores")} style={linkStyle} className="navbar-link">Scores</Nav.Link>
-                <Nav.Link as="span" onClick={() => handleNavClick("/schedule")} style={linkStyle} className="navbar-link">Schedule</Nav.Link>
+                <Nav.Link as="span" onClick={() => handleNavClick('/stats')} style={linkStyle} className="navbar-link">STATS</Nav.Link>
+                <Nav.Link as="span" onClick={() => handleNavClick("/scores")} style={linkStyle} className="navbar-link">SCORES</Nav.Link>
+                <Nav.Link as="span" onClick={() => handleNavClick("/schedule")} style={linkStyle} className="navbar-link">SCHEDULE</Nav.Link>
+                <Nav.Link as="span" onClick={() => handleNavClick('/home')} style={linkStyle} className="navbar-link">NEWS</Nav.Link>
+                
+                {/* User Account Icon */}
+                <Nav.Link as="span" className="navbar-link" onClick={() => handleAccountClick()} style={{ fontSize: '1.3rem', marginLeft: '15px' }}>
+                    <FontAwesomeIcon icon={faUser}/>
+                </Nav.Link>
             </Nav>
             </Container>
         </Navbar>
+        <LoginModal show={showModal} handleClose={handleClose} />
+
         </>
   );
 }

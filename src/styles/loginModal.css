@@ -1,0 +1,29 @@
+/* Styling for the component/loginModal.js */
+
+
+@import url('https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&display=swap');
+
+.modalBody{
+    background-color: #001242;
+    color: #fff;
+    font-family: 'Inknut Antiqua', sans-serif;
+    padding: 1rem 3rem;
+}
+
+.star{
+    color:red;
+}
+
+input::placeholder {
+    font-size: 1rem; 
+}
+
+.signupLink{
+    text-decoration: underline;
+}
+
+.logButton{
+    width: 50%;
+    font-size: 1rem;
+    align-self: center;
+}

@@ -22,10 +22,15 @@ function SportSelection() {
         margin: '10px',
       };
 
-    const {globalState, setGlobalState} = useContext(GlobalStateContext);
+    const {setGlobalState, currentUser, isLoggedIn} = useContext(GlobalStateContext);
 
+    // This function is called when the user clicks on the sport selection buttons
+    // It sets the global state to the sport that the user selects and sets the last sport for the current user
     const handleButtonClick = (sport) => {
         setGlobalState({sport: sport});
+        if(isLoggedIn.bool){
+            currentUser.lastSport = sport;
+        }
     }
     
     return (
