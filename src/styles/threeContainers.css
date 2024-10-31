@@ -1,0 +1,28 @@
+/* Styling for the three containter layout for the main pages. */
+
+.main-content {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.middle-content{
+    flex: 1 1 auto;
+    /* border: 1px solid black; */
+}
+
+.left-content,
+.right-content {
+    flex: 0 0 300px;
+    padding-top:50px;
+    /* border: 1px solid black; */
+}
+
+.left-content{
+    padding-left:20px;
+    align-items: center;
+}
+
+.right-content{
+    align-items: center;
+}

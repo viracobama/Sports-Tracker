@@ -16,10 +16,8 @@ import { GlobalStateContext } from './GlobalState';
 
 import '../styles/loginModal.css';
 
-// Regular expression for email and password validation
+// Regular expression for email validation
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-
 
 const LoginModal = ({ show, handleClose }) => {
     const Navigate = useNavigate();
@@ -68,6 +66,7 @@ const LoginModal = ({ show, handleClose }) => {
             alert(`Welcome back, ${user.fullname}!`);
             setIsLoggedIn({bool: true});
             setCurrentUser(user);
+            handleClose();
             Navigate('/home');
         } else {
             alert('Invalid email or password');

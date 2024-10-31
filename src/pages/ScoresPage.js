@@ -11,24 +11,39 @@ import React, {useContext} from 'react';
 import NavbarBS from '../components/Navbar.js';
 import SportSelection from '../components/sportSelection.js';
 import { GlobalStateContext } from '../components/GlobalState.js';
+import FavTeamsFilter from '../components/FavTeamsFilter.js';
+import FavTeamsReplacement from '../components/FavTeamsReplacement.js';
+
 
 function ScoresPage() {
+
 
   const {globalState, isLoggedIn, currentUser} = useContext(GlobalStateContext);
   const sport = globalState.sport;
 
   return (
     <div>
-      <NavbarBS />
-      <h1>Scores Page</h1>
-      <br></br>
-      
-      {/* Testing : Temp */}
-      <h3>Displaying information about <b>{sport}</b></h3>
-
-      <SportSelection />
-      {/* TODO: implement scores page */}
-
+        <NavbarBS />
+        {/* A div holding page's entire content */}
+        <div className="main-content">
+            {/* left content - formatting the sport selection to left */}
+            <div className="left-content">
+                <SportSelection />
+            </div>
+            {/* Page specific content - main content */}
+            <div className="middle-content">
+              <h4>To-Do: add content for score page</h4>
+              
+            </div>
+            {/* right content - formatting the favorite teams to the right */}
+            <div className="right-content">
+              {isLoggedIn.bool ? (
+                  <FavTeamsFilter/>
+              ) : (
+                <FavTeamsReplacement/>
+              )}
+            </div>
+        </div>            
     </div>
   );
 }

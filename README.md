@@ -19,6 +19,7 @@ When successful, it should show the updates in the "package.json"  file under "d
 
 - npm i --save @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/react-fontawesome
 
+- npm install @fortawesome/free-regular-svg-icons
 
 ## Available Scripts
 
