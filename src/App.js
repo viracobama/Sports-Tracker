@@ -8,6 +8,7 @@ import React, {useContext} from 'react';
 import LandingNavbar from './components/landingNavbar';
 import background from './img/homeImg.jpg';
 import './App.css';
+// import './i18n'; for language change
 
 //These imports are from the bootstrap library and they are used for the sport selecton buttons
 import { Button, ButtonGroup } from 'react-bootstrap';

@@ -12,6 +12,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
+//import './i18n'; for language change
 
 /**
  * Importing the router functions to be used for navigativing the pages
