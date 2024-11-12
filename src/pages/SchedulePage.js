@@ -25,15 +25,18 @@ import { Modal } from 'react-bootstrap';
 function SchedulePage() {
 
   // Get the global state, the user's login status, and the current user from the GlobalStateContext
-  const {globalState, isLoggedIn, removedTeams, NFLteams} = useContext(GlobalStateContext);
+  const {globalState, isLoggedIn, removedTeams, NFLteams, currentUser} = useContext(GlobalStateContext);
   const sport = globalState.sport;
+
+  const favTeams = currentUser.favTeams;
+  const filteredTeams = favTeams.filter(team => globalState.sport === team.strLeague);
 
   const [events, setEvents] = useState([]);
 
 
   useEffect(() => {
-    // set the ids based on removedTeams
-    let ids = removedTeams.map(team => team.idTeam);
+    // set the ids based on favoriteTeams
+    let ids = filteredTeams.map(team => team.idTeam);
 
     //Determining the API endpoint attributes based on the sport selected
     let leagueSTR = 'https://www.thesportsdb.com/api/v1/json/907927/eventsseason.php?id=4391&s=2024'
@@ -51,8 +54,8 @@ function SchedulePage() {
             }
             const data = await res.json();
 
-            // Filter out the events that are from the removed teams
-            const filteredEvents = data.events.filter(event => !ids.includes(event.idHomeTeam) && !ids.includes(event.idAwayTeam));
+            // Filter out the events that are from the favorite teams
+            const filteredEvents = data.events.filter(event => ids.includes(event.idHomeTeam) || ids.includes(event.idAwayTeam));
             // Map the fetched events to the format needed for the FullCalendar component
             const fetchedEvents = filteredEvents.map(event => ({
               title: event.strEvent,
