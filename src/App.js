@@ -1,5 +1,5 @@
 /**
- * This is the landing page of the application.
+ * @file App.js This is the landing page of the application.
  * 
  * Video that helped me set up the useNavigate passing sport values https://www.youtube.com/watch?v=kibtFP9wfLM
  */
@@ -54,7 +54,7 @@ function App() {
     <div className="App">
       <LandingNavbar />
       <div style={backgroundStyle}>
-        <header class = "App-header">Create Your <br></br> Perfect Experience!</header>
+        <header className = "App-header">Create Your <br></br> Perfect Experience!</header>
         <div>
             <ButtonGroup vertical> 
                 <Button style = {buttonStyle} onClick={() => handleButtonClick("NFL")}>NFL</Button>

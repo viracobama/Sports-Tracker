@@ -17,6 +17,12 @@ When successful, it should show the updates in the "package.json"  file under "d
         
         "react-router-dom": "^6.26.2"
 
+- npm i --save @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/react-fontawesome
+
+- npm install @fortawesome/free-regular-svg-icons
+- npm i --save @fullcalendar/core
+- npm install @fullcalendar/react @fullcalendar/daygrid @fullcalendar/timegrid @fullcalendar/list
+
 
 ## Available Scripts
 

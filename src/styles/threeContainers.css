@@ -1,0 +1,28 @@
+/* Styling for the three containter layout for the main pages. */
+
+.main-content {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.middle-content{
+    flex: 2 1 auto;
+    max-height: 800px; 
+    overflow-y: auto;
+}
+
+.left-content,
+.right-content {
+    flex: 0 0 270px;
+    padding-top:50px;
+}
+
+.left-content{
+    padding-left:20px;
+    align-items: center;
+}
+
+.right-content{
+    align-items: center;
+}
