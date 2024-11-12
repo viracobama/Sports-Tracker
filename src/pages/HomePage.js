@@ -3,12 +3,15 @@ import SportSelection from '../components/sportSelection.js';
 import { GlobalStateContext } from '../components/GlobalState.js';
 import React, { useState, useEffect, useContext } from 'react';
 import './HomePage.css'; // Import the CSS file
+import '../i18n.js'; // for language change
+import { useTranslation } from 'react-i18next'; // Import useTranslation for language switching
 
 // URLs for fetching news articles
 const nflUrl = 'https://site.api.espn.com/apis/site/v2/sports/football/nfl/news?limit=50';
 const nbaUrl = 'https://site.api.espn.com/apis/site/v2/sports/basketball/nba/news?limit=50';
 
 function HomePage() {
+    const { t } = useTranslation(); // Access the translation function
     const { globalState, setGlobalState } = useContext(GlobalStateContext);
     const sport = globalState.sport;
     const [data, setData] = useState(null);
@@ -37,8 +40,8 @@ function HomePage() {
             <NavbarBS className="navbar" />
             <h2 className="page-title">Home Page</h2>
             <h3 className="info-title">
-                {sport === 'NFL' && <>Displaying information about <strong>NFL</strong></>}
-                {sport === 'NBA' && <>Displaying information about <strong>NBA</strong></>}
+                {sport === 'NFL' && <>{t('displaying_info_nfl')} <strong>NFL</strong></>}
+                {sport === 'NBA' && <>{t('displaying_info_nba')} <strong>NBA</strong></>}
             </h3>
             <SportSelection />
             {(sport === 'NFL' || sport === 'NBA') ? (

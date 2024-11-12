@@ -11,10 +11,12 @@ import React, { useContext } from 'react';
 import { Button, ButtonGroup } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { GlobalStateContext } from './GlobalState';
+import '../i18n.js'; // for language change
+import { useTranslation } from 'react-i18next'; // Import useTranslation for language switching
 
 
 function SportSelection() {
-
+    const { t } = useTranslation(); // Access the translation function
     const buttonStyle = {
         width: '100px',
         height: '60px',
@@ -48,7 +50,7 @@ function SportSelection() {
     
     return (
         <div>
-            <h6>Choose Your Sport:</h6>
+            <h6>{t("choose_sport")}</h6>
             <ButtonGroup vertical> 
                 <Button style={globalState.sport === 'NFL' ? selectedButtonStyle : buttonStyle} onClick={() => handleButtonClick("NFL")}>NFL</Button>
                 <Button style={globalState.sport === 'NBA' ? selectedButtonStyle : buttonStyle} onClick={() => handleButtonClick("NBA")}>NBA</Button>

@@ -7,8 +7,12 @@ import { GlobalStateContext } from '../components/GlobalState';
 import FavTeamsFilter from '../components/FavTeamsFilter';
 import FavTeamsReplacement from '../components/FavTeamsReplacement';
 import '../styles/ScoresPage.css';
+import '../styles/threeContainers.css'
+import '../i18n.js'; // for language change
+import { useTranslation } from 'react-i18next'; // Import useTranslation for language switching
 
 function ScoresPage() {
+  const { t } = useTranslation(); // Access the translation function
   const { globalState, isLoggedIn, currentUser } = useContext(GlobalStateContext);
   const [teams, setTeams] = useState([]);
   const [filteredTeams, setFilteredTeams] = useState([]);
@@ -105,7 +109,7 @@ function ScoresPage() {
         
         {/* Main content to display last single event for each team in a scrollable box */}
         <div className="middle-content">
-          <h4>{globalState.sport} Teams - Latest Scores</h4>
+          <h4>{globalState.sport} {t('scores_title')}</h4>
           <div className="scrollable-list">
             <ul>
               {filteredTeams.map((team, index) => (
@@ -114,17 +118,17 @@ function ScoresPage() {
                     <strong>{team.strTeam}</strong><br />
                     {scores[team.strTeam] ? (
                       <div>
-                        <strong>Last Game:</strong><br />
+                        <strong>{t('last_game')}</strong><br />
                         {/* Display the home team logo on the left and the away team logo on the right */}
                         <span>
                           <img src={scores[team.strTeam].homeLogo} alt={`${scores[team.strTeam].homeTeam} logo`} width="30" style={{ marginRight: '10px' }} />
                           {scores[team.strTeam].homeTeam} {scores[team.strTeam].homeScore} - {scores[team.strTeam].awayScore} {scores[team.strTeam].awayTeam}
                           <img src={scores[team.strTeam].awayLogo} alt={`${scores[team.strTeam].awayTeam} logo`} width="30" style={{ marginLeft: '10px' }} />
                         </span><br />
-                        <span>Date: {new Date(scores[team.strTeam].date).toLocaleDateString()}</span>
+                        <span>{t('scores_date')} {new Date(scores[team.strTeam].date).toLocaleDateString()}</span>
                       </div>
                     ) : (
-                      <span>No recent game data available</span>
+                      <span>{t('no_game_data')}</span>
                     )}
                   </div>
                 </li>
