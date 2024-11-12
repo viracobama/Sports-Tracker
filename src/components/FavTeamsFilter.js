@@ -3,7 +3,7 @@
 
 */
 
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 //Filled in heart icon
@@ -17,18 +17,17 @@ import '../styles/account.css';
 const FavTeamsFilter = () => {
 
     // Get the sport selected and the current user's favorite teams from the GlobalStateContext
-    const {currentUser, globalState} = useContext(GlobalStateContext);
+    const {currentUser, globalState, removedTeams, setRemovedTeams} = useContext(GlobalStateContext);
     const favTeams = currentUser.favTeams;
-
-    //The removedTeams state keeps track of the teams that the user removes from the filter
-    const [removedTeams, setRemovedTeams] = useState([]);
 
     //This function handles the removal of a team from the filter
     const handleRemoveTeamFilter = (team) => {
         if (removedTeams.includes(team)) {
-            setRemovedTeams(removedTeams.filter(t => t !== team));
+            let filteredTeams = removedTeams.filter(t => t !== team);
+            setRemovedTeams(filteredTeams);
           } else {
-            setRemovedTeams([...removedTeams, team]);
+            let filteredTeams = [...removedTeams, team];
+            setRemovedTeams(filteredTeams);
           }
     };
 

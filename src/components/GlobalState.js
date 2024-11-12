@@ -20,7 +20,7 @@ export const AuthContext = createContext();
 
 export const GlobalStateProvider = ({children}) => {
     // Global state for the sport selection
-    const [globalState, setGlobalState] = useState({});
+    const [globalState, setGlobalState] = useState({sport: 'NFL'});
 
     // Global state for the user login status and current user
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -30,6 +30,12 @@ export const GlobalStateProvider = ({children}) => {
     const [NBAteams, setNBATeams] = useState([]);
     const [NFLteams, setNFLTeams] = useState([]);
     const [Bothteams, setBothTeams] = useState([]);
+
+    // Global context for the events (used for calendar)
+    const [events, setEvents] = useState([]);
+
+    // Global context for the removed teams from the favorite teams filter
+    const [removedTeams, setRemovedTeams] = useState([]);
 
     //useEffect to fetch the NBA and NFL teams
     useEffect(() => {
@@ -78,7 +84,10 @@ export const GlobalStateProvider = ({children}) => {
             setCurrentUser,
             NBAteams,
             NFLteams,
-            Bothteams
+            Bothteams,
+            events,
+            removedTeams,
+            setRemovedTeams,
         }}>
             {children}
         </GlobalStateContext.Provider>

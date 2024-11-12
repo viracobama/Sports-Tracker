@@ -1,0 +1,53 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&display=swap');
+
+*{
+  font-family: 'Inknut Antiqua', sans-serif;
+  overflow: show;
+}
+
+.main-content{
+  max-height: 600px; 
+  overflow-y: auto;
+  position: sticky;
+  top: 0;
+}
+
+.right-content .left-content{
+  position:sticky;
+  top:0;
+}
+  
+.fc .fc-toolbar .fc-prev-button,
+.fc .fc-toolbar .fc-next-button {
+  font-size: 0.75em;  /* Smaller font for arrows */
+  padding: 0;
+  margin:0;
+}
+  
+.fc .fc-toolbar .fc-today-button {
+  font-size: 1em;   /* Smaller font for "Today" */
+}
+
+.fc .fc-toolbar.fc-header-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fc-event-title {
+  font-size: 10px; 
+  white-space: normal; 
+  text-align: center;
+}
+
+.fc{
+  zoom: 0.9;
+  width:100%
+}
+
+.fc .fc-daygrid-day, .fc .fc-daygrid-day-frame {
+  width: 100%;
+}
+

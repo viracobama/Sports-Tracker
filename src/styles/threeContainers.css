@@ -7,15 +7,15 @@ align-items: center;
 }
 
 .middle-content{
-    flex: 1 1 auto;
-    /* border: 1px solid black; */
+    flex: 2 1 auto;
+    max-height: 800px; 
+    overflow-y: auto;
 }
 
 .left-content,
 .right-content {
-    flex: 0 0 300px;
+    flex: 0 0 270px;
     padding-top:50px;
-    /* border: 1px solid black; */
 }
 
 .left-content{

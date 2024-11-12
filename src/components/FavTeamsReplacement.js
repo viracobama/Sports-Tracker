@@ -18,7 +18,7 @@ function FavTeamsReplacement() {
     return (
          <>
             <center>
-                <p class="titleRigt">Login/SignUp to filter data with your favorite teams.</p>
+                <p className="titleRigt">Login/SignUp to filter data with your favorite teams.</p>
                 <Button onClick={handleShow} style= {{borderRadius: '20px', width: '100px'}} variant="outline-primary">Log in</Button>
             </center>
             <LoginModal show={showModal} handleClose={handleClose} />
