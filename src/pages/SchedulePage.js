@@ -1,3 +1,7 @@
+// This is the SchedulePage component that displays a calendar of events for NBA or NFL games.
+// The calender utilized i18n for language switching and the FullCalendar library for the calendar display.
+// When the language is set to Spanish, the calender will display in Spanish and start on Monday.
+
 import React, { useContext, useState, useEffect, useMemo } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';

@@ -1,3 +1,7 @@
+// Code to display the home page of the app
+// This page will display the news articles for the selected sport
+// This is the default page after logging in
+
 import NavbarBS from '../components/Navbar.js';
 import SportSelection from '../components/sportSelection.js';
 import { GlobalStateContext } from '../components/GlobalState.js';

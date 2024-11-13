@@ -1,5 +1,7 @@
 /**
  * @file AccountPage.js displays account information if a user is logged in, otherwise shows the login modal.
+ * - The user can view their favorite teams, add or remove favorite teams, and sign out.
+ * - The user can also switch between English and Spanish languages.
  */
 
 import React, { useContext, useState, useEffect } from 'react';

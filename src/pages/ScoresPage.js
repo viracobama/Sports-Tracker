@@ -1,4 +1,9 @@
 // ScoresPage.js
+// This file contains the ScoresPage component which displays the latest scores for NBA or NFL games.
+// From here, the user can select a sport, view the latest scores of their favorite teams.
+// When the user is not logged in, the favorite teams filter is replaced with a login button.
+// When not logged in, the user can still view the latest scores for all teams of a league depending on sport.
+// The list of teams is from the TheSportsDB API and the scores are from ESPN's API.
 
 import React, { useContext, useEffect, useState } from 'react';
 import NavbarBS from '../components/Navbar';

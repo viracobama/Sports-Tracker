@@ -2,7 +2,7 @@
 - It appears on the right hand side of the main pages.
 */
 
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // Filled-in heart icon
 import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';

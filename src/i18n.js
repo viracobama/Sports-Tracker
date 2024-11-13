@@ -1,4 +1,7 @@
-// i18n.js
+// i18n.js - The file to hold the translation files for the SPORTS-TRACKER application.
+// Referenced this video "https://www.youtube.com/watch?v=dltHi9GWMIo&t=567s" for setting up i18n
+// Referenced this documentation "https://react.i18next.com/guides/quick-start" 
+// And here "https://www.npmjs.com/package/i18next-browser-languagedetector"
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
