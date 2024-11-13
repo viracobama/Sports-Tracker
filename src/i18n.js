@@ -27,11 +27,11 @@ i18n
           news_nav: "News",
           add_remove: "Add or remove teams on your account page!",
           displaying_info_nba: "Displaying information about ",
-          displaying_info_nfl: "Displaying information about ",
           no_game_data: "No recent game data available",
           choose_sport: "Choose Your Sport:",
           scores_date: "Date: ",
-          last_game: "Last Game:"
+          last_game: "Last Game:",
+          news_articles: "Sports News Articles",
         }
       },
       es: {
@@ -52,12 +52,12 @@ i18n
           schedule_nav: "Calendario",
           news_nav: "Noticias",
           add_remove: "¡Añade o elimina equipos en tu página de cuenta!",
-          displaying_info_nba: "Mostrando información sobre la ",
-          displaying_info_nfl: "Mostrando información sobre la",
+          news_title: "Mostrando información sobre la ",
           no_game_data: "No hay datos de juegos recientes disponibles",
           choose_sport: "Elige tu deporte:",
           scores_date: "Fetcha: ",
-          last_game: "Último Partido:"
+          last_game: "Último Partido:",
+          news_articles: "Artículos de Noticias Deportivas"
         }
       }
     },

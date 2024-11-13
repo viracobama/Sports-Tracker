@@ -12,7 +12,7 @@ const nbaUrl = 'https://site.api.espn.com/apis/site/v2/sports/basketball/nba/new
 
 function HomePage() {
     const { t } = useTranslation(); // Access the translation function
-    const { globalState, setGlobalState } = useContext(GlobalStateContext);
+    const { globalState, setGlobalState, isLoggedIn } = useContext(GlobalStateContext);
     const sport = globalState.sport;
     const [data, setData] = useState(null);
 
@@ -36,6 +36,7 @@ function HomePage() {
     }, [sport]);
 
     return (
+
         <div>
             <NavbarBS className="navbar" />
             <h2 className="page-title">Home Page</h2>
