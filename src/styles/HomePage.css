@@ -1,0 +1,50 @@
+.scrollable-container {
+    height: 100vh;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.article {
+    margin-bottom: 100px;
+    text-align: center;
+    font-family: 'Inknut Antiqua', serif;
+}
+
+.article-image {
+    width: 100%;
+    height: 320px;
+    object-fit: contain;
+}
+
+.article-headline {
+    font-size: 1.6rem;
+    font-family: 'Inknut Antiqua', serif;
+    font-weight: bold;
+}
+
+.article-description {
+    font-size: 1rem;
+    font-family: 'Inknut Antiqua', serif;
+}
+
+.read-more {
+    color: blue;
+    text-decoration: underline;
+}
+
+.selected-sport {
+    font-size: 1rem;
+    font-family: 'Inknut Antiqua', serif;
+}
+
+.navbar {
+    width: 100%;
+    height: 60px;
+    background-color: #333;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

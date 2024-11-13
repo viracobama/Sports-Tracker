@@ -8,13 +8,15 @@ import React, {useContext} from 'react';
 import LandingNavbar from './components/landingNavbar';
 import background from './img/homeImg.jpg';
 import './App.css';
-// import './i18n'; for language change
+import './i18n.js'; // for language change
+import { useTranslation } from 'react-i18next'; // Import useTranslation for language switching
 
 //These imports are from the bootstrap library and they are used for the sport selecton buttons
 import { Button, ButtonGroup } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
 import { GlobalStateContext } from './components/GlobalState';
+import { t } from 'i18next';
 
 
 function App() {
@@ -55,7 +57,7 @@ function App() {
     <div className="App">
       <LandingNavbar />
       <div style={backgroundStyle}>
-        <header className = "App-header">Create Your <br></br> Perfect Experience!</header>
+        <header className = "App-header">{t('greeting_1')} <br></br> {t('greeting_2')}</header>
         <div>
             <ButtonGroup vertical> 
                 <Button style = {buttonStyle} onClick={() => handleButtonClick("NFL")}>NFL</Button>
