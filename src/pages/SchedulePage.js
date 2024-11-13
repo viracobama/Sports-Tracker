@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useMemo } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import NavbarBS from '../components/Navbar.js';
@@ -9,27 +9,36 @@ import FavTeamsReplacement from '../components/FavTeamsReplacement.js';
 import { Modal } from 'react-bootstrap';
 import '../styles/schedule.css';
 import { useTranslation } from 'react-i18next';
+import esLocale from '@fullcalendar/core/locales/es';
 
 function SchedulePage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { globalState, isLoggedIn, removedTeams, currentUser } = useContext(GlobalStateContext);
   const sport = globalState.sport;
 
-  // Define favorite teams or default to an empty array if the user is not logged in
-  const favTeams = currentUser ? currentUser.favTeams : [];
-  const filteredTeams = isLoggedIn.bool ? favTeams.filter(team => globalState.sport === team.strLeague) : [];
+  const favTeams = useMemo(() => {
+    return currentUser ? currentUser.favTeams : [];
+  }, [currentUser]);
+
+  const filteredTeams = useMemo(() => {
+    return isLoggedIn.bool
+      ? favTeams.filter(team => globalState.sport === team.strLeague)
+      : [];
+  }, [favTeams, globalState.sport, isLoggedIn.bool]);
 
   const [events, setEvents] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
 
-  useEffect(() => {
-    // Determine team IDs to filter by, based on whether the user is logged in
-    let ids = isLoggedIn.bool ? filteredTeams.map(team => team.idTeam) : null;
-    
-    // Set the API endpoint based on the selected sport
-    let leagueSTR = 'https://www.thesportsdb.com/api/v1/json/907927/eventsseason.php?id=4391&s=2024';
+  // Determine FullCalendar locale dynamically
+  const calendarLocale = useMemo(() => {
+    return i18n.language === 'es' ? esLocale : undefined; // Default to 'en' if not 'es'
+}, [i18n.language]);
 
+  useEffect(() => {
+    const ids = isLoggedIn.bool ? filteredTeams.map(team => team.idTeam) : null;
+
+    let leagueSTR = 'https://www.thesportsdb.com/api/v1/json/907927/eventsseason.php?id=4391&s=2024';
     if (sport === 'NBA') {
       leagueSTR = 'https://www.thesportsdb.com/api/v1/json/907927/eventsseason.php?id=4387&s=2024-2025';
     }
@@ -42,7 +51,6 @@ function SchedulePage() {
         }
         const data = await res.json();
 
-        // If logged in, filter events by favorite team IDs, else show all events
         const filteredEvents = isLoggedIn.bool
           ? data.events.filter(event => ids.includes(event.idHomeTeam) || ids.includes(event.idAwayTeam))
           : data.events;
@@ -53,7 +61,7 @@ function SchedulePage() {
           strHomeTeam: event.strHomeTeam,
           strVenue: event.strVenue,
           strPoster: event.strPoster,
-          eventDate: event.dateEvent
+          eventDate: event.dateEvent,
         }));
         setEvents(fetchedEvents);
       } catch (error) {
@@ -119,6 +127,7 @@ function SchedulePage() {
             events={events}
             eventClick={handleEventClick}
             aspectRatio={1.6}
+            locale={calendarLocale} // Dynamically set the locale
           />
         </div>
         <div className="right-content">

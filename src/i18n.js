@@ -32,6 +32,12 @@ i18n
           scores_date: "Date: ",
           last_game: "Last Game:",
           news_articles: "Sports News Articles",
+          no_articles_found: "No articles found",
+          loading: "Loading...",
+          read_more: "Read More",
+          date: "Date",
+          home_team: "Home Team",
+          venue: "Venue"
         }
       },
       es: {
@@ -55,9 +61,15 @@ i18n
           news_title: "Mostrando información sobre la ",
           no_game_data: "No hay datos de juegos recientes disponibles",
           choose_sport: "Elige tu deporte:",
-          scores_date: "Fetcha: ",
+          scores_date: "Fecha: ",
           last_game: "Último Partido:",
-          news_articles: "Artículos de Noticias Deportivas"
+          news_articles: "Artículos de Noticias Deportivas",
+          no_articles_found: "No se encontraron artículos",
+          loading: "Cargando...",
+          read_more: "Leer más",
+          date: "Fecha",
+          home_team: "Equipo Local",
+          venue: "Lugar"
         }
       }
     },

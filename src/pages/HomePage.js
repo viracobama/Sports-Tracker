@@ -9,18 +9,28 @@ import '../styles/HomePage.css';
 import '../i18n.js'; // for language change
 import { useTranslation } from 'react-i18next'; // Import useTranslation for language switching
 
-// URLs for fetching news articles
-const nflUrl = 'https://site.api.espn.com/apis/site/v2/sports/football/nfl/news?limit=50';
-const nbaUrl = 'https://site.api.espn.com/apis/site/v2/sports/basketball/nba/news?limit=50';
-
 function HomePage() {
-    const { t } = useTranslation(); // Access the translation function
-    const { globalState, setGlobalState, isLoggedIn } = useContext(GlobalStateContext);
+    const { t, i18n } = useTranslation(); // Access the translation function
+    const { globalState, isLoggedIn } = useContext(GlobalStateContext);
     const sport = globalState.sport;
     const [data, setData] = useState(null);
 
+    // Determine the API URL dynamically based on the sport and language
+    const getApiUrl = (sport, lang) => {
+        if (sport === 'NFL') {
+            return `https://site.api.espn.com/apis/site/v2/sports/football/nfl/news?limit=50&lang=${lang}`;
+        } else if (sport === 'NBA') {
+            return `https://site.api.espn.com/apis/site/v2/sports/basketball/nba/news?limit=50&lang=${lang}`;
+        }
+        return null;
+    };
+
     useEffect(() => {
-        const fetchData = async (url) => {
+        const fetchData = async () => {
+            const lang = i18n.language; // Get the current language (en or es)
+            const url = getApiUrl(sport, lang);
+            if (!url) return;
+
             try {
                 const response = await fetch(url);
                 const result = await response.json();
@@ -31,67 +41,62 @@ function HomePage() {
             }
         };
 
-        if (sport === 'NFL') {
-            fetchData(nflUrl);
-        } else if (sport === 'NBA') {
-            fetchData(nbaUrl);
-        }
-    }, [sport]);
+        fetchData();
+    }, [sport, i18n.language]); // Re-fetch data whenever the sport or language changes
 
     return (
-
         <div>
-            <NavbarBS/>
-             {/*  A div holding page's entire content */}
-             <div className="main-content">
+            <NavbarBS />
+            {/* A div holding page's entire content */}
+            <div className="main-content">
                 {/* left content - formatting the sport selection to left */}
                 <div className="left-content">
                     <SportSelection />
                 </div>
                 {/* Page specific content - main content */}
                 <div className="middle-content">
-                <br/><br/><br/><br/>
-                <h1>{t("news_articles")}</h1>
-                {(sport === 'NFL' || sport === 'NBA') ? (
-                    data ? (
-                        <div className="scrollable-container">
-                            {Array.isArray(data.articles) ? (
-                                data.articles.map((article, index) => (
-                                    <div key={index} className="article">
-                                        {article.images && article.images.length > 0 && (
-                                            <a href={article.links.web.href} target="_blank" rel="noopener noreferrer">
-                                                <img className="article-image" src={article.images[0].url} alt={article.headline} />
-                                            </a>
-                                        )}
-                                        <h2 className="article-headline">{article.headline}</h2>
-                                        <p className="article-description">
-                                            {article.description}{' '}
-                                            <a href={article.links.web.href} target="_blank" rel="noopener noreferrer" className="read-more">
-                                                Read more
-                                            </a>
-                                        </p>
-                                    </div>
-                                ))
-                            ) : (
-                                <p>No articles found.</p>
-                            )}
-                        </div>
+                    <br /><br /><br /><br />
+                    <h1>{t("news_articles")}</h1>
+                    {(sport === 'NFL' || sport === 'NBA') ? (
+                        data ? (
+                            <div className="scrollable-container">
+                                {Array.isArray(data.articles) ? (
+                                    data.articles.map((article, index) => (
+                                        <div key={index} className="article">
+                                            {article.images && article.images.length > 0 && (
+                                                <a href={article.links.web.href} target="_blank" rel="noopener noreferrer">
+                                                    <img className="article-image" src={article.images[0].url} alt={article.headline} />
+                                                </a>
+                                            )}
+                                            <h2 className="article-headline">{article.headline}</h2>
+                                            <p className="article-description">
+                                                {article.description}{' '}
+                                                <a href={article.links.web.href} target="_blank" rel="noopener noreferrer" className="read-more">
+                                                    {t("read_more")}
+                                                </a>
+                                            </p>
+                                        </div>
+                                    ))
+                                ) : (
+                                    <p>{t("no_articles_found")}</p>
+                                )}
+                            </div>
+                        ) : (
+                            <p>{t("loading")}</p>
+                        )
                     ) : (
-                        <p>Loading...</p>
-                    )
-                ) : (
-                    <p>Select NFL or NBA to see news articles.</p>
-                )}     
+                        <p>{t("select_sport_prompt")}</p>
+                    )}
                 </div>
                 {/* right content - formatting the favorite teams to the right */}
                 <div className="right-content">
                     {isLoggedIn.bool ? (
-                        <FavTeamsFilter/>
+                        <FavTeamsFilter />
                     ) : (
-                        <FavTeamsReplacement/>
+                        <FavTeamsReplacement />
                     )}
                 </div>
-            </div>     
+            </div>
         </div>
     );
 }

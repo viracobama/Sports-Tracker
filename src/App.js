@@ -9,7 +9,7 @@ import LandingNavbar from './components/landingNavbar';
 import background from './img/homeImg.jpg';
 import './App.css';
 import './i18n.js'; // for language change
-import { useTranslation } from 'react-i18next'; // Import useTranslation for language switching
+
 
 //These imports are from the bootstrap library and they are used for the sport selecton buttons
 import { Button, ButtonGroup } from 'react-bootstrap';

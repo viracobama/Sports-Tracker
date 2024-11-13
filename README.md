@@ -22,7 +22,7 @@ When successful, it should show the updates in the "package.json"  file under "d
 - npm install @fortawesome/free-regular-svg-icons
 - npm i --save @fullcalendar/core
 - npm install @fullcalendar/react @fullcalendar/daygrid @fullcalendar/timegrid @fullcalendar/list
-
+- npm install react-i18next i18next i18next-browser-languagedetector --save
 
 ## Available Scripts
 
