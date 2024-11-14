@@ -64,6 +64,9 @@ i18n
           sacks: "Sacks",
           interceptions: "Interceptions",
           nba_players: "NBA Players",  
+          nba_offensive_players: "NBA Offensive Players",
+          nba_defensive_players: "NBA Defensive Players",
+          three_pointers_percentage: "3-Point Percentage",
         }
       },
       es: {
@@ -119,6 +122,9 @@ i18n
           sacks: "Capturas",
           interceptions: "Intercepciones",
           nba_players: "Jugadores de la NBA",
+          nba_offensive_players: "Jugadores ofensivos de la NBA",
+          nba_defensive_players: "Jugadores defensivos de la NBA",
+          three_pointers_percentage: "Porcentaje de triples",
         }
       }
     },

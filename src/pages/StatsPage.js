@@ -38,12 +38,14 @@ function StatsPage() {
   const [nbaPointsLeaderboard, setNbaPointsLeaderboard] = useState([]);
   const [nbaAssistsLeaderboard, setNbaAssistsLeaderboard] = useState([]);
   const [nbaReboundsLeaderboard, setNbaReboundsLeaderboard] = useState([]);
-  const [nbaFilter, setNbaFilter] = useState('points');
+  const [nbaOffensiveFilter, setNbaFilter] = useState('points');
+  const [nbaDefensiveFilter, setNbaDefensiveFilter] = useState('rebounds');
   const [players, setPlayers] = useState([]);
   const [teams, setTeams] = useState([]);
   const [nbaStealsLeaderboard, setNbaStealsLeaderboard] = useState([]);
   const [nbaBlocksLeaderboard, setNbaBlocksLeaderboard] = useState([]);
   const [defTacklesLeaderboard, setDefTacklesLeaderboard] = useState([]);
+  const [nbaThreePointersPercentageLeaderboard, setNbaThreePointersPercentageLeaderboard] = useState([]);
   const nbaTeamLogos = {
     ATL: 'https://upload.wikimedia.org/wikipedia/en/2/24/Atlanta_Hawks_logo.svg',
     BOS: 'https://upload.wikimedia.org/wikipedia/en/8/8f/Boston_Celtics.svg',
@@ -374,6 +376,22 @@ function StatsPage() {
                 .catch(err => {
                   console.error('Fetch NBA BlockedShots error:', err); // Log any errors
                 });
+                // Fetch NBA 3 point percentage leaderboard
+      fetch(`https://api.sportsdata.io/v3/nba/stats/json/PlayerSeasonStats/2024?key=5bc55735b64942c2b00538dea52fb146
+        `, options)
+                .then(res => {
+                  if (!res.ok) {
+                    throw new Error(`HTTP error! status: ${res.status}`);
+                  }
+                  return res.json();
+                })
+                .then(data => {
+                  console.log('Fetched NBA 3point data:', data); // Log the fetched data
+                  setNbaThreePointersPercentageLeaderboard(data.sort((a, b) => b.ThreePointersPercentage - a.ThreePointersPercentage));
+                })
+                .catch(err => {
+                  console.error('Fetch NBA 3point error:', err); // Log any errors
+                });
     }
   }, [sport]);
 
@@ -393,8 +411,11 @@ function StatsPage() {
     setDefFilter(event.target.value);
   };
 
-  const handleNbaFilterChange = (event) => {
+ const handleNbaOffensiveFilterChange = (event) => {
     setNbaFilter(event.target.value);
+  };
+  const handleNbaDefensiveFilterChange = (event) => {
+    setNbaDefensiveFilter(event.target.value);
   };
 
   const getPlayerTeam = (playerId) => {
@@ -497,25 +518,40 @@ function StatsPage() {
           </>
         ) : (
           <>
-            <div className="middle-left-content">
-              <div className="header-filter">
-                <h5>{t('nba_players')}</h5>
-                <select onChange={handleNbaFilterChange} value={nbaFilter}>
-                  <option value="points">{t('points')}</option>
-                  <option value="assists">{t('assists')}</option>
-                  <option value="rebounds">{t('rebounds')}</option>
-                  <option value="steals">{t('steals')}</option>
-                  <option value="blocks">{t('blocks')}</option>
-                </select>
-              </div>
-              <ol>
-              {(nbaFilter === 'points' ? nbaPointsLeaderboard : nbaFilter === 'assists' ? nbaAssistsLeaderboard : nbaFilter === 'rebounds' ? nbaReboundsLeaderboard : nbaFilter === 'steals' ? nbaStealsLeaderboard : nbaBlocksLeaderboard).slice(0, 10).map((player, index) => (
-                <li key={player.PlayerID}>
-                  {index + 1}. {player.Name} ({player.Team}) <img src={getTeamLogo(player.Team)} alt={player.Team} style={{ width: '30px', height: '20px' }} />: {nbaFilter === 'points' ? player.Points : nbaFilter === 'assists' ? player.Assists : nbaFilter === 'rebounds' ? player.Rebounds : nbaFilter === 'steals' ? player.Steals : player.BlockedShots} {nbaFilter === 'points' ? 'pts' : nbaFilter === 'assists' ? 'asts' : nbaFilter === 'rebounds' ? 'rebs' : nbaFilter === 'steals' ? 'stls' : 'blks'}
-                </li>
-              ))}
-            </ol>
-            </div>
+<div className="middle-left-content">
+  <div className="header-filter">
+    <h5>{t('nba_offensive_players')}</h5>
+    <select onChange={handleNbaOffensiveFilterChange} value={nbaOffensiveFilter}>
+      <option value="points">{t('points')}</option>
+      <option value="assists">{t('assists')}</option>
+      <option value="threePointersPercentage">{t('three_pointers_percentage')}</option>
+    </select>
+  </div>
+  <ol>
+    {(nbaOffensiveFilter === 'points' ? nbaPointsLeaderboard : nbaOffensiveFilter === 'assists' ? nbaAssistsLeaderboard : nbaThreePointersPercentageLeaderboard).slice(0, 10).map((player, index) => (
+      <li key={player.PlayerID}>
+        {index + 1}. {player.Name} ({player.Team}) <img src={getTeamLogo(player.Team)} alt={player.Team} style={{ width: '30px', height: '20px' }} />: {nbaOffensiveFilter === 'points' ? player.Points : nbaOffensiveFilter === 'assists' ? player.Assists : player.ThreePointersPercentage} {nbaOffensiveFilter === 'points' ? 'pts' : nbaOffensiveFilter === 'assists' ? 'asts' : '3P%'}
+      </li>
+    ))}
+  </ol>
+</div>
+<div className="middle-left-content">
+  <div className="header-filter">
+    <h5>{t('nba_defensive_players')}</h5>
+    <select onChange={handleNbaDefensiveFilterChange} value={nbaDefensiveFilter}>
+      <option value="rebounds">{t('rebounds')}</option>
+      <option value="steals">{t('steals')}</option>
+      <option value="blocks">{t('blocks')}</option>
+    </select>
+  </div>
+  <ol>
+    {(nbaDefensiveFilter === 'rebounds' ? nbaReboundsLeaderboard : nbaDefensiveFilter === 'steals' ? nbaStealsLeaderboard : nbaBlocksLeaderboard).slice(0, 10).map((player, index) => (
+      <li key={player.PlayerID}>
+        {index + 1}. {player.Name} ({player.Team}) <img src={getTeamLogo(player.Team)} alt={player.Team} style={{ width: '30px', height: '20px' }} />: {nbaDefensiveFilter === 'rebounds' ? player.Rebounds : nbaDefensiveFilter === 'steals' ? player.Steals : player.BlockedShots} {nbaDefensiveFilter === 'rebounds' ? 'rebs' : nbaDefensiveFilter === 'steals' ? 'steals' : 'blks'}
+      </li>
+    ))}
+  </ol>
+</div>
           </>
         )}
       </div>
