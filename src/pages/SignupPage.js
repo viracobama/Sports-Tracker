@@ -15,12 +15,12 @@ import Register from '../components/Register';
 import '../styles/register.css';
 import logo from '../img/logo.png';
 import LoginModal from '../components/loginModal';
-
+import { useTranslation } from 'react-i18next'; // Import useTranslation for language switching
 
 
 function SignupPage() { 
     const Navigate = useNavigate();
-
+    const { t, i18n } = useTranslation(); // Access i18n for changing language
     // Manage the state for the login modal
     const [showModal, setShowModal] = useState(false);
 
@@ -53,8 +53,8 @@ function SignupPage() {
             <div class="link">
                {/* This is the right side of the page containing the login button for active users */}`
                 <center>
-                    <p class="titleRight">Already have an<br/>account? </p>
-                    <Button style= {{borderRadius: '20px'}} variant="outline-light" onClick={handleShow}>Log in</Button>
+                    <p class="titleRight">{t("signup_exists")}</p>
+                    <Button style= {{borderRadius: '20px'}} variant="outline-light" onClick={handleShow}>{t("signup_exists_login")}</Button>
                 </center>
                 <LoginModal show={showModal} handleClose={handleClose} />
             </div>

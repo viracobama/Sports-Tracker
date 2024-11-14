@@ -10,6 +10,7 @@ i18n
   .use(LanguageDetector) // Detects the user's language
   .use(initReactI18next)  // Initializes with React
   .init({
+    returnObjects: true,
     resources: {
       en: {
         translation: {
@@ -67,6 +68,31 @@ i18n
           nba_offensive_players: "NBA Offensive Players",
           nba_defensive_players: "NBA Defensive Players",
           three_pointers_percentage: "3-Point Percentage",
+          login_message: "Login/SignUp to filter data with your favorite teams.",
+          landing_login: "Login or SignUp",
+          login_welcome: "Welcome back!",
+          login_email: "Email",
+          login_password: "Password",
+          login_login_button: "Login",
+          login_new_user: "New?",
+          login_signup: "Sign Up",
+          signup_full_name: "Full Name:",
+          signup_email: "Email:",
+          signup_password: "Password:",
+          signup_confirm_password: "Confirm Password:",
+          signup_exists: "Already have an account?",
+          signup_exists_login: "Log In",
+          signup_greeting: "Hello!",
+          signup_button: "Sign Up",
+          validation: {
+            line1: "Full name must be 3 to 23 characters long.",
+            line2: "Can only contain letters.",
+            line3: "Email must be in vaild format.",
+            line4: "Password must be 8 to 24 characters long.",
+            line5: "Must contain at least: one uppercase letter, ",
+            line6: "one lowercase letter, one digit, and one ! @ # $ %.",
+            line7: "Passwords must match."
+          }
         }
       },
       es: {
@@ -125,6 +151,31 @@ i18n
           nba_offensive_players: "Jugadores ofensivos de la NBA",
           nba_defensive_players: "Jugadores defensivos de la NBA",
           three_pointers_percentage: "Porcentaje de triples",
+          login_message: "Inicia sesión/Regístrate para filtrar datos con tus equipos favoritos.",
+          landing_login: "Iniciar sesión o registrarse",
+          login_welcome: "¡Bienvenido de nuevo!",
+          login_email: "Correo electrónico",
+          login_password: "Contraseña",
+          login_login_button: "Iniciar sesión",
+          login_new_user: "¿Nuevo?",
+          login_signup: "Regístrate",
+          signup_full_name: "Nombre completo:",
+          signup_email: "Correo electrónico:",
+          signup_password: "Contraseña:",
+          signup_confirm_password: "Confirmar contraseña:",
+          signup_exists: "¿Ya tienes una cuenta?",
+          signup_exists_login: "Iniciar sesión",
+          signup_greeting: "¡Hola!",
+          signup_button: "Regístrate",
+          validation: {
+            line1: "El nombre completo debe tener entre 3 y 23 caracteres.",
+            line2: "Solo puede contener letras.",
+            line3: "El correo electrónico debe estar en formato válido.",
+            line4: "La contraseña debe tener entre 8 y 24 caracteres.",
+            line5: "Debe contener al menos: una letra mayúscula, ",
+            line6: "una letra minúscula, un dígito y un ! @ # $ %.",
+            line7: "Las contraseñas deben coincidir."
+          },
         }
       }
     },

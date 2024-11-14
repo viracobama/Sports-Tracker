@@ -26,6 +26,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
 
 import { GlobalStateContext } from './GlobalState';
+import { useTranslation } from 'react-i18next'; // Import useTranslation for language switching
+import { t } from 'i18next';
 
 
 // Validating name, email and password input.
@@ -39,7 +41,7 @@ const NAME_REGEX = /^[A-z ]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 const Register = () => {
-
+    const {line1, line2, line3, line4, line5, line6, line7} = t("validation");
     const userRef = useRef(); // To keep the user input when component loads
     const errRef = useRef(); 
 
@@ -156,12 +158,12 @@ const Register = () => {
             aria-live: this attribute makes sure the error msg is shown immediately without waiting for the user to focus on it*/}
             <p ref={errRef} className={errMsg ? "errMsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
     
-            <h1 style={{ textAlign: 'left' }}>Hello!</h1>
+            <h1 style={{ textAlign: 'left' }}>{t("signup_greeting")}</h1>
             
             <form onSubmit={handleSubmit}>
                 {/* FULL NAME INPUT */}
                 <label htmlFor='fullname'>
-                    Full Name
+                    {t("signup_full_name")}
                     <span className={validName ? "valid" : "hide"}>
                         <FontAwesomeIcon icon={faCheck} />
                     </span>
@@ -184,13 +186,13 @@ const Register = () => {
                 {/* This info circle will display if the user is in the input field, the full name has an input, and if the full name is invalid */}
                 <p id="nameNote" className={nameFocus && fullname && !validName ? "instructions" : "offscreen"}>
                     <FontAwesomeIcon icon={faInfoCircle} />
-                    Full name must be 3 to 23 characters long.<br/>
-                    Can only contain letters.
+                    {line1}<br/>
+                    {line2}
                 </p>
                     
                 {/* EMAIL INPUT FIELD */}
                 <label htmlFor='email'>
-                    Email
+                    {t("signup_email")}
                     {/* faCheck is the green check mark when the input is valid */}
                     <span className = {validEmail ? "valid" : "hide"}>
                         <FontAwesomeIcon icon={faCheck} />
@@ -218,12 +220,12 @@ const Register = () => {
                 {/* This will display if the user in in the input field, the user has an input, and if the username is invalid */}
                 <p id="emailNote" className={emailFocus && email && !validEmail ? "instructions" : "offscreen"}>
                     <FontAwesomeIcon icon={faInfoCircle} />
-                    Email must be in vaild format.
+                    {line3}
                 </p>
 
                 {/* PASSWORD INPUT FIELD */}
                 <label htmlFor='password'> 
-                    Password:
+                    {t("signup_password")}
                     <span className={validPwd ? "valid" : "hide"}>
                         <FontAwesomeIcon icon={faCheck} />
                     </span>
@@ -244,15 +246,15 @@ const Register = () => {
 
                 <p id="passwordNote" className={pwdFocus && !validPwd ? "instructions" : "offscreen"}>
                     <FontAwesomeIcon icon={faInfoCircle}/>
-                    Password must be 8 to 24 characters long.<br/>
-                    Must contain at least: one uppercase letter, <br/>
-                    one lowercase letter, one digit, and one ! @ # $ %.
+                    {line4}<br/>
+                    {line5} <br/>
+                    {line6}
                 </p>
                 
 
                 {/* CONFIRM PASSWORD INPUT FIELD */}
                 <label htmlFor='confirmPassword'>
-                    Confirm Password:
+                    {t("signup_confirm_password")}
                     <span className={validMatch && matchPwd ? "valid" : "hide"}>
                         <FontAwesomeIcon icon={faCheck} />
                     </span>
@@ -272,12 +274,12 @@ const Register = () => {
                 />
                 <p id="confirmNote" className={matchFocus && !validMatch ? "instructions" : "offscreen"}>
                     <FontAwesomeIcon icon={faInfoCircle} />
-                    Passwords must match.
+                    {line7}
                 </p>
                     
                 {/* SUBMIT BUTTON */}
                 <button disabled={!validName || !validEmail || !validPwd || !validMatch ? true : false}
-                >Sign Up</button>
+                >{t("signup_button")}</button>
               
 
             </form>

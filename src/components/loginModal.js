@@ -13,7 +13,8 @@ import { Modal, Button} from 'react-bootstrap';
 import {faCheck, faTimes, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { GlobalStateContext } from './GlobalState';
-
+import { useTranslation } from 'react-i18next'; // Import useTranslation for language switching
+import { t } from 'i18next';
 import '../styles/loginModal.css';
 
 // Regular expression for email validation
@@ -81,10 +82,10 @@ const LoginModal = ({ show, handleClose }) => {
             <Modal.Body className="modalBody">
                 <form onSubmit={handleSubmit}>
                     <br/>
-                    <h1>Welcome Back!</h1>
+                    <h1>{t("login_welcome")}</h1>
                     {/* EMAIL INPUT FIELD */}
                     <label htmlFor='email'>
-                        Email
+                        {t("login_email")}
                         {/* faCheck is the green check mark when the input is valid */}
                         <span className = {validEmail ? "valid" : "hide"}>
                             <FontAwesomeIcon icon={faCheck} />
@@ -115,7 +116,7 @@ const LoginModal = ({ show, handleClose }) => {
                     </p>
 
                     {/* PASSWORD INPUT FIELD */}
-                    <label htmlFor='password'>Password</label>
+                    <label htmlFor='password'>{t("login_password")}</label>
                     <input
                         type="password"
                         id="password"
@@ -124,9 +125,9 @@ const LoginModal = ({ show, handleClose }) => {
                     />
                     <br/>
                     <Button variant="light" type="submit" className="logButton">
-                        Log In
+                        {t("login_login_button")}
                     </Button>
-                    <p style={{textAlign: 'center'}}><br/>New? <span class="signupLink" onClick={() => handleSignup()}>Sign Up</span></p>
+                    <p style={{textAlign: 'center'}}><br/>{t("login_new_user")} <span class="signupLink" onClick={() => handleSignup()}>{t("login_signup")}</span></p>
                 </form>
             </Modal.Body>
         </Modal>

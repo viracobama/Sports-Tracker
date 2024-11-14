@@ -9,10 +9,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from '../img/logo.png';
 import '../styles/navbar.css';
 import LoginModal from './loginModal';
-
+import { useTranslation } from 'react-i18next'; // Import useTranslation for language switching
 
 function LandingNavbar() {
-
+    const { t } = useTranslation(); // Access the translation function
     // State for the login modal
     const [showModal, setShowModal] = useState(false);
 
@@ -39,7 +39,7 @@ function LandingNavbar() {
                 />
             </Navbar.Brand>
             <Nav className="justify-content-end">
-                <Nav.Link onClick={handleShow} style={linkStyle} className="navbar-link">Login or SignUp</Nav.Link>
+                <Nav.Link onClick={handleShow} style={linkStyle} className="navbar-link">{t('landing_login')}</Nav.Link>
             </Nav>
             </Container>
         </Navbar>

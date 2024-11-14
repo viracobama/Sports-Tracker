@@ -5,9 +5,11 @@ import { Button } from 'react-bootstrap';
 
 //Used for the login button
 import LoginModal from '../components/loginModal';
+import { useTranslation } from 'react-i18next'; // Import useTranslation for language switching
+import { t } from 'i18next';
 
 function FavTeamsReplacement() {
-     
+    const { t } = useTranslation(); // Access the translation function
     // State for the login modal
     const [showModal, setShowModal] = useState(false);
 
@@ -18,7 +20,7 @@ function FavTeamsReplacement() {
     return (
          <>
             <center>
-                <p className="titleRigt">Login/SignUp to filter data with your favorite teams.</p>
+                <p className="titleRigt">{t('login_message')}</p>
                 <Button onClick={handleShow} style= {{borderRadius: '20px', width: '100px'}} variant="outline-primary">Log in</Button>
             </center>
             <LoginModal show={showModal} handleClose={handleClose} />

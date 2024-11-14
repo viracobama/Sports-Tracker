@@ -12,6 +12,7 @@ import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
 import { GlobalStateContext } from './GlobalState';
 import '../styles/account.css';
 import { useTranslation } from 'react-i18next'; // Import useTranslation for language switching
+import { t } from 'i18next';
 
 const FavTeamsFilter = () => {
     const { t } = useTranslation(); // Access the translation function
