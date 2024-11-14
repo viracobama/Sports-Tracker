@@ -5,13 +5,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&display=swap');
 
 
-.navbar-link {
-  font-family: 'Inknut Antiqua', sans-serif;
-  color: black;
+@keyframes highlight {
+  from {
+      border-bottom-color: transparent;
+  }
+  to {
+      border-bottom-color: #4CB2D5;
+  }
 }
 
-.navbar-link.active{
-  text-decoration: underline;
+.navbar-link {
+  transition: border-bottom-color 0.3s ease-in-out;
+}
+
+.navbar-link-active {
+  animation: highlight 0.3s forwards;
 }
 
 .searchBar{
