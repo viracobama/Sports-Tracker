@@ -1,23 +1,10 @@
-/**
- * @file Navbar.js is a file that contains the Navbar component for the Sports App.
- * 
- * Resources used:
- *  Setting up the Navbar help:
- *  https://www.youtube.com/watch?v=DTPERO1bl7w
- *  https://www.youtube.com/watch?v=o05ZP6_JQqE
- * 
- *  Documentation: 
- *  https://reactrouter.com/en/main/start/tutorial
- *  https://react-bootstrap.netlify.app/docs/getting-started/introduction/
- */
-
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import React, { useState, useContext } from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import { GlobalStateContext } from './GlobalState';
 import LoginModal from './loginModal';
@@ -40,8 +27,16 @@ function NavbarBS() {
         fontSize: '1.3rem',
     };
 
+    const activeLinkStyle = {
+        fontSize: '1.3rem',
+        fontWeight: 'bold',
+        color: '#4CB2D5', // Highlight color for the active link
+        borderBottom: '2px solid', // Add a line underneath the active link
+    };
+
     const { globalState, isLoggedIn } = useContext(GlobalStateContext);
     const navigate = useNavigate();
+    const location = useLocation(); // Get the current location
     
     // Function to handle the navigation to different pages when the user clicks on the navbar links
     const handleNavClick = (path) => { 
@@ -72,21 +67,46 @@ function NavbarBS() {
                         />
                     </Navbar.Brand>
                     <Nav className="justify-content-end">
-                        <Nav.Link as="span" onClick={() => handleNavClick('/stats')} style={linkStyle} className="navbar-link">
+                        <Nav.Link 
+                            as="span" 
+                            onClick={() => handleNavClick('/stats')} 
+                            style={location.pathname === '/stats' ? activeLinkStyle : linkStyle} 
+                            className={`navbar-link ${location.pathname === '/stats' ? 'navbar-link-active' : ''}`}
+                        >
                             {t('stats_nav')} {/* Use translation key for Stats */}
                         </Nav.Link>
-                        <Nav.Link as="span" onClick={() => handleNavClick("/scores")} style={linkStyle} className="navbar-link">
+                        <Nav.Link 
+                            as="span" 
+                            onClick={() => handleNavClick("/scores")} 
+                            style={location.pathname === '/scores' ? activeLinkStyle : linkStyle} 
+                            className={`navbar-link ${location.pathname === '/scores' ? 'navbar-link-active' : ''}`}
+                        >
                             {t('scores_nav')} {/* Use translation key for Scores */}
                         </Nav.Link>
-                        <Nav.Link as="span" onClick={() => handleNavClick("/schedule")} style={linkStyle} className="navbar-link">
+                        <Nav.Link 
+                            as="span" 
+                            onClick={() => handleNavClick("/schedule")} 
+                            style={location.pathname === '/schedule' ? activeLinkStyle : linkStyle} 
+                            className={`navbar-link ${location.pathname === '/schedule' ? 'navbar-link-active' : ''}`}
+                        >
                             {t('schedule_nav')} {/* Use translation key for Schedule */}
                         </Nav.Link>
-                        <Nav.Link as="span" onClick={() => handleNavClick('/home')} style={linkStyle} className="navbar-link">
+                        <Nav.Link 
+                            as="span" 
+                            onClick={() => handleNavClick('/home')} 
+                            style={location.pathname === '/home' ? activeLinkStyle : linkStyle} 
+                            className={`navbar-link ${location.pathname === '/home' ? 'navbar-link-active' : ''}`}
+                        >
                             {t('news_nav')} {/* Use translation key for News */}
                         </Nav.Link>
                         
                         {/* User Account Icon */}
-                        <Nav.Link as="span" className="navbar-link" onClick={handleAccountClick} style={{ fontSize: '1.3rem', marginLeft: '15px' }}>
+                        <Nav.Link 
+                            as="span" 
+                            className="navbar-link" 
+                            onClick={handleAccountClick} 
+                            style={{ fontSize: '1.3rem', marginLeft: '15px' }}
+                        >
                             <FontAwesomeIcon icon={faUser}/>
                         </Nav.Link>
                     </Nav>
